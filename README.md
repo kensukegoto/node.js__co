@@ -4,6 +4,7 @@
 - [coの使い方](./myCo/index.js)
 - [ジェネレーターでページ内の画像を取得](./pageGetter/index.js)
 - [coとジェネレーターでページ内の画像を取得](./pageGetter/index2.js)
+- [coとジェネレーターで複数の画像を並行に取得](./pageGetter/index3.js)
 
 # ポイント
 
