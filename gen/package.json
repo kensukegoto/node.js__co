@@ -1,0 +1,17 @@
+{
+  "name": "how-to-co",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "co": "^4.6.0",
+    "prompts": "^2.3.2",
+    "thunkify": "^2.1.2"
+  }
+}
