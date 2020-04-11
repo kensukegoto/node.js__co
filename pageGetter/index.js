@@ -23,22 +23,33 @@ function* processsings(){
 
 
   for(let i = 0,l = imgs.length; i < l; i++){
+
+    const myImg = yield function (cb){
+      fetch(imgs[i])
+        .then(res => cb(res))
+    } // blobs
+
+    const dirName = urlParse(myImg.url).hostname;
+    const fileName = urlParse(myImg.url).path.split("/")
+          .filter( e => /\.jpe{0,1}g|\.png|\.svg/.test(e))[0];
+
     yield function (cb){
 
-      fetch(imgs[i])
-        .then(res => {
-          const dirName = urlParse(res.url).hostname;
-          if(!fs.existsSync(dirName)){
-            fs.mkdirSync(dirName);
-          }
-          const name = urlParse(res.url).path.split("/")
-            .filter( e => /\.jpe{0,1}g|\.png|\.svg/.test(e));
+      fs.exists(dirName,exsits =>{
 
-          	const dest = fs.createWriteStream(`${dirName}/${name[0]}`);
-            res.body.pipe(dest);
-          cb();
+        if(exsits) return cb(dirName);
+
+        fs.mkdir(dirName,err => {
+          cb(dirName)
         })
+      })
+    } // myDir
+
+    yield function (cb){
+      myImg.body.pipe(fs.createWriteStream(`${dirName}/${fileName}`));
+      cb();
     }
+
   }
 
 }
